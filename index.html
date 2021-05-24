@@ -106,7 +106,14 @@ body{
 
     $usernameForm.submit(function(e){
 				e.preventDefault();
-			console.log("SUBMITTED")
+				socket.emit('new user', $username.val(), function(data){
+					if(data){
+						$('#namesWrapper').hide();
+						$('#mainWrapper').show();
+					} else{
+					
+					}
+				});
 			});
 
     $messageForm.submit(function(e){
