@@ -1,0 +1,19 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "description": "simple chat apllication ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciwwan1980/chat-application.git"
+  },
+  "author": "Ajil Kado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ciwwan1980/chat-application/issues"
+  },
+  "homepage": "https://github.com/ciwwan1980/chat-application#readme"
+}
