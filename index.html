@@ -91,55 +91,52 @@ body{
 		</div>
     </div>
     
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+   
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-        
-        <script>
+    <script>
     $(function(){
-    const socket=io.connect()
-    const $messageForm = $('#messageForm');
-	const $message = $('#message');
-	const $chat = $('#chatWindow');
-    const $usernameForm = $('#usernameForm');
-	const $users = $('#users');
-	const $username = $('#username');
-    const $error = $('#error');
+        var socket = io.connect();
+        var $messageForm = $('#messageForm');
+        var $message = $('#message');
+        var $chat = $('#chatWindow');
+        var $usernameForm = $('#usernameForm');
+        var $users = $('#users');
+        var $username = $('#username');
+        var $error = $('#error');
 
-		$usernameForm.submit(function(e){
-				e.preventDefault();
-				socket.emit('new user', $username.val(), function(data){
-					if(data){
-						$('#namesWrapper').hide();
-						$('#mainWrapper').show();
-					} else{
-						$error.html('Username is taken');
-					}
-				});
-			});
+        $usernameForm.submit(function(e){
+            e.preventDefault();
+            socket.emit('new user', $username.val(), function(data){
+                if(data){
+                    $('#namesWrapper').hide();
+                    $('#mainWrapper').show();
+                } else{
+                    $error.html('Username is taken');
+                }
+            });
+        });
 
-    socket.on('usernames', function(data){
-				var html = '';
+        socket.on('usernames', function(data){
+            var html = '';
+            for(i = 0;i < data.length;i++){
+                html += data[i] + '<br>';
+            }
+            $users.html(html);
+        });
 
-				for(i = 0;i < data.length;i++){
-					html += data[i] + '<br>';
-				}
+        $messageForm.submit(function(e){
+            e.preventDefault();
+            socket.emit('send message', $message.val());
+            $message.val('');
+        });
 
-				$users.html(html);
-			});
-            
-    $messageForm.submit(function(e){
-				e.preventDefault();
-				socket.emit('send message', $message.val());
-				$message.val('');
-			});
-
-           socket.on('new message', function(data){
-				$chat.append('<strong>'+data.user+'</strong>: '+data.msg+'<br>');
-			});
-            
+        socket.on('new message', function(data){
+            $chat.append('<strong>'+data.user+'</strong>: '+data.msg+'<br>');
+        });
 
     });
-        </script>
+    </script>
 
 </body>
 </html>
