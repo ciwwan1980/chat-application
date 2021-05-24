@@ -20,7 +20,7 @@ body{
 		}
 
 		#mainWrapper{
-			/* display:none; */
+			display:none;
 		}
         
         #chatWrapper{
@@ -47,7 +47,7 @@ body{
 			background:#f4f4f4;
 			padding:10px;
 			margin-left:20px;
-            display: none;
+            /* display: none; */
 		}
 
 		input{
@@ -99,6 +99,15 @@ body{
     const $messageForm = $('#messageForm');
 	const $message = $('#message');
 	const $chat = $('#chatWindow');
+    const $usernameForm = $('#usernameForm');
+	const $users = $('#users');
+	const $username = $('#username');
+    const $error = $('#error');
+
+    $usernameForm.submit(function(e){
+				e.preventDefault();
+			console.log("SUBMITTED")
+			});
 
     $messageForm.submit(function(e){
 				e.preventDefault();
