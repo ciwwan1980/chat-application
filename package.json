@@ -6,15 +6,7 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ciwwan1980/chat-application.git"
-  },
-  "author": "Ajil Kado",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ciwwan1980/chat-application/issues"
-  },
+
   "homepage": "https://github.com/ciwwan1980/chat-application#readme",
   "dependencies": {
     "express": "^4.17.1",
@@ -23,5 +15,4 @@
   "devDependencies": {
     "nodemon": "^2.0.7"
   }
-  
 }
