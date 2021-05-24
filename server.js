@@ -4,20 +4,17 @@ const io = require('socket.io')(server);
 io.on('connection', () => { /* … */ });
 server.listen(3000);
 
-console.log("SERVER IS RUNNING")
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-//connection to socket
 io.sockets.on('connection', function(socket){
 	console.log('Socket Connected...');
-    usernames = [];
+usernames = [];
 
 	socket.on('new user', function(data, callback){
-		
-        if(usernames.indexOf(data) != -1){
+		if(usernames.indexOf(data) != -1){
 			callback(false);
 		} else {
 			callback(true);
@@ -27,22 +24,23 @@ io.sockets.on('connection', function(socket){
 		}
 	});
 
-    // Update Usernames
+	// Update Usernames
 	function updateUsernames(){
 		io.sockets.emit('usernames', usernames);
 	}
+
 	// Send Message
 	socket.on('send message', function(data){
 		io.sockets.emit('new message', {msg: data, user:socket.username});
 	});
-   
-		// Disconnect
+
+	// Disconnect
 	socket.on('disconnect', function(data){
 		if(!socket.username){
 			return;
 		}
-        
+
 		usernames.splice(usernames.indexOf(socket.username), 1);
 		updateUsernames();
 	});
-})
+});
